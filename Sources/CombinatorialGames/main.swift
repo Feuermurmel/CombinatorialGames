@@ -1,2 +1,1 @@
-print(BabyRook(5).plays)
-print(King(1, 2).plays)
+print((BabyRook(5) + King(1, 2)).plays)
