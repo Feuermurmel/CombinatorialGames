@@ -6,4 +6,6 @@ import PackageDescription
 let package = Package(
     name: "CombinatorialGames",
     dependencies: [],
-    targets: [.target(name: "CombinatorialGames")])
+    targets: [
+        .target(name: "Examples", dependencies: ["CombinatorialGames"]),
+        .target(name: "CombinatorialGames")])

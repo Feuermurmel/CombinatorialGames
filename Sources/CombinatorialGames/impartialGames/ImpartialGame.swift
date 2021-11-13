@@ -1,13 +1,13 @@
-protocol ImpartialGame: Hashable {
+public protocol ImpartialGame: Hashable {
     var plays: [Self] { get }
 }
 
 extension ImpartialGame {
-    var firstPlayerWins: Bool {
+    public var firstPlayerWins: Bool {
         FirstPlayerWins.firstPlayerWins(self)
     }
 
-    var reducedGameValue: BabyRook {
+    public var reducedGameValue: BabyRook {
         for i in 0...100 {
             let rook = BabyRook(i)
 

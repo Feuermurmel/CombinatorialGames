@@ -1,5 +1,5 @@
 /// Existential box for any ImpartialGame.
-struct AnyImpartialGame: ImpartialGame, CustomStringConvertible {
+public struct AnyImpartialGame: ImpartialGame, CustomStringConvertible {
     let value: AnyHashable
     let getPlays: (AnyHashable) -> [AnyImpartialGame]
 
@@ -13,13 +13,13 @@ struct AnyImpartialGame: ImpartialGame, CustomStringConvertible {
         getPlays = { value in (value as! G).plays.map({ AnyImpartialGame($0) }) }
     }
 
-    var plays: [AnyImpartialGame] { getPlays(value) }
+    public var plays: [AnyImpartialGame] { getPlays(value) }
 
-    var description: String { "\(value)" }
+    public var description: String { "\(value)" }
 
-    func hash(into hasher: inout Hasher) { hasher.combine(value) }
+    public func hash(into hasher: inout Hasher) { hasher.combine(value) }
 
-    static func == (lhs: AnyImpartialGame, rhs: AnyImpartialGame) -> Bool {
+    public static func == (lhs: AnyImpartialGame, rhs: AnyImpartialGame) -> Bool {
         return lhs.value == rhs.value
     }
 }

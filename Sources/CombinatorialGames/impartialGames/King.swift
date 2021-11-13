@@ -1,13 +1,13 @@
-struct King: ImpartialGame, CustomStringConvertible {
+public struct King: ImpartialGame, CustomStringConvertible {
     let x: Int
     let y: Int
 
-    init(_ x: Int, _ y: Int) {
+    public init(_ x: Int, _ y: Int) {
         self.x = x
         self.y = y
     }
 
-    var plays: [King] {
+    public var plays: [King] {
         var plays: [King] = []
 
         for (x, y) in [(x - 1, y), (x - 1, y - 1), (x, y - 1)] {
@@ -19,5 +19,5 @@ struct King: ImpartialGame, CustomStringConvertible {
         return plays
     }
 
-    var description: String { "K\(x),\(y)" }
+    public var description: String { "K\(x),\(y)" }
 }

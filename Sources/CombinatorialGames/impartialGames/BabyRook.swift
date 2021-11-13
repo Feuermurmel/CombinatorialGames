@@ -1,13 +1,13 @@
-struct BabyRook: ImpartialGame, CustomStringConvertible {
+public struct BabyRook: ImpartialGame, CustomStringConvertible {
     let position: Int
 
-    init(_ position: Int) {
+    public init(_ position: Int) {
         self.position = position
     }
 
-    var plays: [BabyRook] {
+    public var plays: [BabyRook] {
         return (0..<position).map({ BabyRook($0) })
     }
 
-    var description: String { "r\(position)" }
+    public var description: String { "r\(position)" }
 }
