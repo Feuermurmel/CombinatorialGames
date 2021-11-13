@@ -26,3 +26,16 @@ fileprivate enum FirstPlayerWins {
 func firstPlayerWins<G: ImpartialGame>(game: G) -> Bool {
     FirstPlayerWins.firstPlayerWins(game: game)
 }
+
+func reduceGameValue<G: ImpartialGame>(game: G) -> BabyRook {
+    for i in 0...100 {
+        let rook = BabyRook(i)
+
+        if !firstPlayerWins(game: game + rook) {
+            return rook
+        }
+    }
+
+    /// We have to stop at some point. The algorithm is the most stupid possible anyways.
+    fatalError("¯\\_(ツ)_/¯")
+}
