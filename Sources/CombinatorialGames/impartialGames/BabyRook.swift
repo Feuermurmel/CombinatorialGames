@@ -1,4 +1,4 @@
-struct BabyRook: ImpartialGame {
+struct BabyRook: ImpartialGame, CustomStringConvertible {
     let position: Int
 
     init(_ position: Int) {
@@ -8,4 +8,6 @@ struct BabyRook: ImpartialGame {
     var plays: [BabyRook] {
         return (0..<position).map({ BabyRook($0) })
     }
+
+    var description: String { "r\(position)" }
 }

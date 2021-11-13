@@ -1,4 +1,4 @@
-struct King: ImpartialGame {
+struct King: ImpartialGame, CustomStringConvertible {
     let x: Int
     let y: Int
 
@@ -18,4 +18,6 @@ struct King: ImpartialGame {
 
         return plays
     }
+
+    var description: String { "K\(x),\(y)" }
 }
