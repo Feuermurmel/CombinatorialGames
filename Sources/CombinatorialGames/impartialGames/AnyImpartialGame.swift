@@ -1,4 +1,4 @@
-/// Existential box for any ImpartialGame.
+/// Existential box for any type conforming to `ImpartialGame`.
 public struct AnyImpartialGame: ImpartialGame, CustomStringConvertible {
     let value: AnyHashable
     let getPlays: (AnyHashable) -> [AnyImpartialGame]
