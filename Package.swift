@@ -7,6 +7,6 @@ let package = Package(
     name: "CombinatorialGames",
     dependencies: [],
     targets: [
-        .target(name: "Examples", dependencies: ["CombinatorialGames"]),
+        .target(name: "Examples", dependencies: ["CombinatorialGames", "ExampleMonster"]),
         .target(name: "CombinatorialGames"),
         .target(name: "ExampleMonster")])
