@@ -8,4 +8,5 @@ let package = Package(
     dependencies: [],
     targets: [
         .target(name: "Examples", dependencies: ["CombinatorialGames"]),
-        .target(name: "CombinatorialGames")])
+        .target(name: "CombinatorialGames"),
+        .target(name: "ExampleMonster")])
