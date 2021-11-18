@@ -1,6 +1,6 @@
 import Foundation
 
-fileprivate var outputsByLineByFile: [String: [Int:[String]]] = [:]
+fileprivate var outputsByLineByFile: [String:[Int:[String]]] = [:]
 
 fileprivate enum SourceLine {
     case code(String)
@@ -66,10 +66,8 @@ fileprivate func processSourceFile(filePath: String) {
     for (lineNumber, line) in lines.enumerated() {
         switch line {
         case let .code(source):
-            let outputLines = outputsByLine[lineNumber] ?? []
-
             codeLines.append(source)
-            codeLines.append(contentsOf: outputLines.map({ "// \($0)" }))
+            codeLines.append(contentsOf: outputsByLine[lineNumber] ?? [])
         case let .markdownComment(content):
             printCodeLines()
             print(content)
@@ -88,9 +86,11 @@ fileprivate let initialized: Void = ({
     }
 })()
 
-func addOutput(_ output: String, _ filePath: String, _ lineNumber: Int) {
+func addOutput(_ output: String, _ filePath: String, _ lineNumber: Int, _ columnNumber: Int) {
     /// The closure in the definition of this variable is executed the first time the variable is accessed.
     _ = initialized
 
-    outputsByLineByFile[filePath, default: [:]][lineNumber - 1, default: []].append(output)
+    let padding = String(repeating: " ", count: max(0, columnNumber - 3))
+
+    outputsByLineByFile[filePath, default: [:]][lineNumber - 1, default: []].append("//\(padding) ^ \(output)")
 }
