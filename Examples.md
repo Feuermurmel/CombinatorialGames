@@ -60,7 +60,7 @@ let game2 = BabyRook(7) + BabyRook(5) + BabyRook(3) + BabyRook(1)
 
 ```swift
 show("\(game2) ~ \(game2.reducedGameValue)")
-//   ^ r7 + r5 + r3 + r1 ~ r0
+//   ^ r7 + r5 + r3 + r1 ~ r0: String
 ```
 
 The result indicates indicating that this game of Nim is equivalent to a baby rook without any available moves, which means that the player taking the first turn will lose.

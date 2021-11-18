@@ -9,6 +9,6 @@ public func show<T>(_ item: T, filePath: String = #filePath, lineNumber: Int = #
 }
 
 /// Add the specified message as a comment line into the annotated source listing after the line from which this method is called.
-public func show(_ message: String, filePath: String = #filePath, lineNumber: Int = #line, column: Int = #column) {
-    addOutput(message, filePath, lineNumber, column)
+public func show(rawString: String, filePath: String = #filePath, lineNumber: Int = #line, column: Int = #column) {
+    addOutput(rawString, filePath, lineNumber, column)
 }
