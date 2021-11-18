@@ -70,3 +70,4 @@ The `~` operator can be used to test whether two game positions are equivalent, 
 show(game ~ game2.plays[1])
 //   ^ true: Bool
 ```
+

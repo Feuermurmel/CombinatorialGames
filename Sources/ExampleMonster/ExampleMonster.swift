@@ -51,8 +51,8 @@ fileprivate func processSourceFile(filePath: String) {
         let blankPrefix = codeLines.prefix(while: \.isEmpty)
         let rest = codeLines.suffix(from: blankPrefix.count)
 
-        var nonBlank = rest.prefix(while: { !$0.isEmpty })
-        let blankSuffix = rest.suffix(from: rest.count)
+        var nonBlank = rest.prefix(through: rest.lastIndex(where: { !$0.isEmpty }) ?? -1)
+        let blankSuffix = rest.suffix(from: nonBlank.count)
 
         if !nonBlank.isEmpty { nonBlank = ["```swift"] + nonBlank + ["```"] }
         for i in blankPrefix + nonBlank + blankSuffix { print(i) }
