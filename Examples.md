@@ -2,7 +2,7 @@
 
 # CombinatorialGames API
 
-These examples are contained in the source file [Sources/Examples/main.swift](), which is contained in a runnable target called `Examples`. When run, the target will print a Markdown-formatted version of the source file which combines the source code, markup from `///`-prefixed comments and the representations of the values passed to `show()`.
+These examples are contained in the source file [Sources/Examples/main.swift](Sources/Examples/main.swift), which is contained in a runnable target called `Examples`. When run, the target will print a Markdown-formatted version of the source file which combines the source code, markup from `///`-prefixed comments and the representations of the values passed to `show()`.
 
 The output is written to the file `Examples.md` and checked in. It can be update using the following command:
 
