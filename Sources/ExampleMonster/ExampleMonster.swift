@@ -11,8 +11,13 @@ fileprivate func getSourceLines(_ source: String) -> [SourceLine] {
     var lines: [SourceLine] = []
 
     for var line in source.components(separatedBy: "\n") {
-        if line.starts(with: "/// ") {
-            line.removeFirst(4)
+        if line.starts(with: "///") {
+            line.removeFirst(3)
+
+            if line.starts(with: " ") {
+                line.removeFirst()
+            }
+
             lines.append(.markdownComment(line))
         } else {
             lines.append(.code(line))
