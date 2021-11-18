@@ -66,3 +66,7 @@ show("\(game2) ~ \(game2.reducedGameValue)")
 The result indicates indicating that this game of Nim is equivalent to a baby rook without any available moves, which means that the player taking the first turn will lose.
 
 The `~` operator can be used to test whether two game positions are equivalent, i.e. have the same game value.
+```swift
+show(game ~ game2.plays[1])
+// true: Bool
+```

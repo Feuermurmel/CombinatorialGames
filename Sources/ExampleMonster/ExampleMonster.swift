@@ -42,18 +42,12 @@ fileprivate func printLines<C: Collection>(_ lines: C) where C.Element == String
 }
 
 fileprivate func processSourceFile(filePath: String) {
-    var codeLines: [String] = []
     let outputsByLine = outputsByLineByFile[filePath] ?? [:]
+    let lines = getSourceLines(loadSourceFile(filePath))
 
-    func handleSourceLine(_ lineNumber: Int, _ source: String) {
-        codeLines.append(source)
+    var codeLines: [String] = []
 
-        for i in outputsByLine[lineNumber] ?? [] {
-            codeLines.append("// \(i)")
-        }
-    }
-
-    func handleMarkdownCommentLine(_ content: String) {
+    func printCodeLines() {
         let blankPrefix = codeLines.prefix(while: \.isEmpty)
         let rest = codeLines.suffix(from: blankPrefix.count)
 
@@ -61,24 +55,28 @@ fileprivate func processSourceFile(filePath: String) {
         let blankSuffix = rest.suffix(from: rest.count)
 
         if !nonBlank.isEmpty { nonBlank = ["```swift"] + nonBlank + ["```"] }
-        for i in blankPrefix + nonBlank + blankSuffix + [content] { print(i) }
+        for i in blankPrefix + nonBlank + blankSuffix { print(i) }
 
         codeLines = []
     }
-
-    let lines = getSourceLines(loadSourceFile(filePath))
 
     print("<!-- Generated from file \(filePath) -->")
     print()
 
     for (lineNumber, line) in lines.enumerated() {
         switch line {
-        case let .code(source): handleSourceLine(lineNumber, source)
-        case let .markdownComment(content): handleMarkdownCommentLine(content)
+        case let .code(source):
+            let outputLines = outputsByLine[lineNumber] ?? []
+
+            codeLines.append(source)
+            codeLines.append(contentsOf: outputLines.map({ "// \($0)" }))
+        case let .markdownComment(content):
+            printCodeLines()
+            print(content)
         }
     }
 
-    /// TODO: Print rest of `codeLines`.
+    printCodeLines()
 }
 
 fileprivate let initialized: Void = ({
