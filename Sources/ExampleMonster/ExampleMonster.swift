@@ -35,6 +35,12 @@ fileprivate func loadSourceFile(_ filePath: String) -> String {
     }
 }
 
+fileprivate func printLines<C: Collection>(_ lines: C) where C.Element == String {
+    for i in lines {
+        print(i)
+    }
+}
+
 fileprivate func processSourceFile(filePath: String) {
     var codeLines: [String] = []
     let outputsByLine = outputsByLineByFile[filePath] ?? [:]
@@ -48,20 +54,15 @@ fileprivate func processSourceFile(filePath: String) {
     }
 
     func handleMarkdownCommentLine(_ content: String) {
-        let firstNonEmpty = codeLines.firstIndex(where: { !$0.isEmpty }) ?? 0
-        let lastNonEmpty = codeLines.lastIndex(where: { !$0.isEmpty }) ?? -1
+        let blankPrefix = codeLines.prefix(while: \.isEmpty)
+        let rest = codeLines.suffix(from: blankPrefix.count)
 
-        if firstNonEmpty <= lastNonEmpty {
-            for _ in 0 ..< max(firstNonEmpty, 1) { print() }
+        var nonBlank = rest.prefix(while: { !$0.isEmpty })
+        let blankSuffix = rest.suffix(from: rest.count)
 
-            print("```swift")
-            for i in codeLines[firstNonEmpty...lastNonEmpty] { print(i) }
-            print("```")
-        }
+        if !nonBlank.isEmpty { nonBlank = ["```swift"] + nonBlank + ["```"] }
+        for i in blankPrefix + nonBlank + blankSuffix + [content] { print(i) }
 
-        for _ in 0 ..< max(codeLines.count - lastNonEmpty - 1, 1) { print() }
-
-        print(content)
         codeLines = []
     }
 
